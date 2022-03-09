@@ -15,7 +15,8 @@
     "eslint": "eslint .",
     "fix": "eslint . --fix",
     "cypress:open": "cypress open",
-    "test:e2e": "cd front-end && cypress run"
+    "test:e2e": "cd front-end && cypress run",
+    "start:frontback": "npm run dev & npm start"
   },
   "author": "",
   "license": "ISC",

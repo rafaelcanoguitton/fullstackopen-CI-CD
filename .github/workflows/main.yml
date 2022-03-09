@@ -35,7 +35,7 @@ jobs:
           SECRET: ${{ secrets.SECRET }}
         with:
           command: npm run test:e2e
-          start: npm run dev & npm run start
+          start: npm run start:frontback
           wait-on: http://localhost:3003
           project: "./front-end" 
 
