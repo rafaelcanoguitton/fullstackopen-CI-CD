@@ -11,8 +11,6 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - name: create env file
-        run: touch .env && echo SECRET="${{secrets.SECRET}}" >> .env && echo PORT="3003" >> .env && echo TEST_MONGODB_URI="${{secrets.MONGODB_URI}}" >> .env && echo MONGO_DB_URI="${{secrets.MONGODB_URI}}" >> .env && cat .env
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
@@ -23,6 +21,11 @@ jobs:
         run: npm run test
       - name: test backend
         run: npm run test:server
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          PORT: 3003
+          TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          SECRET: ${{ secrets.SECRET }}
       - name: test e2e
         uses: cypress-io/github-action@v2
         with:
