@@ -26,13 +26,18 @@ jobs:
           PORT: 3003
           TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
           SECRET: ${{ secrets.SECRET }}
-      - name: test e2e
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          PORT: 3003
-          TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          SECRET: ${{ secrets.SECRET }}
-        run: npm run test:e2e
+    end_to_end_pipeline:
+      runs-on: ubuntu-latest
+      steps:
+        - name: npm install
+          run: npm install
+        - name: test e2e
+          run: npm run test:e2e
+          env:
+            MONGODB_URI: ${{ secrets.MONGODB_URI }}
+            PORT: 3003
+            TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
+            SECRET: ${{ secrets.SECRET }}
 
   build:
     #name event for pull request
