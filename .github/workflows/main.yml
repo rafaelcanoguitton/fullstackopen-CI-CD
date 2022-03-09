@@ -1,0 +1,49 @@
+name: Exercise 11.20
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [open, synchronize]
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: create env file
+        run: touch .env && echo "SECRET=${{secrets.SECRET}}" >> .env && echo "PORT=3003" >> .env && echo "TEST_MONGODB_URI=${{secrets.MONGODB_URI}}" >> .env
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: npm install
+        run: npm install
+      - name: test frontend
+        with:
+          command: npm run test:frontend
+          start: npm run dev & npm run start
+          wait-on: http://localhost:3003,http://localhost:3000
+      - name: test backend
+        with:
+          command: npm run test:server
+          start: npm run dev
+          wait-on: http://localhost:3003
+      - name: test e2e
+        with:
+          command: npm run test:e2e
+          start: npm run dev & npm run start
+          wait-on: http://localhost:3003,http://localhost:3000
+
+  build:
+    #name event for pull request
+    if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits[0].message),'#skip')}}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch

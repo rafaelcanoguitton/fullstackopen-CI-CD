@@ -2,21 +2,30 @@
   "name": "part4",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "front-end/src/index.js",
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "start:server": "NODE_ENV=production node index.js",
+    "test:server": "NODE_ENV=test jest --verbose --runInBand",
     "dev": "NODE_ENV=development nodemon index.js",
     "lint": "eslint .",
-    "dotenv": "^10.0.0"
+    "start": "cd front-end && react-scripts start",
+    "build": "react-scripts build",
+    "test": "cd front-end && react-scripts test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint .",
+    "fix": "eslint . --fix",
+    "cypress:open": "cypress open",
+    "test:e2e": "cd front-end && cypress run"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^7.32.0",
-    "jest": "^27.0.6",
     "nodemon": "^2.0.12",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "cypress": "^8.3.1"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -30,9 +39,20 @@
     "mongoose": "^5.2.1",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0",
-    "redux": "^4.1.1"
+    "redux": "^4.1.1",
+    "@testing-library/user-event": "^12.6.3",
+    "axios": "^0.21.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
   },
+  "proxy": "http://localhost:3003",
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "front-end"
+    ]
   }
 }

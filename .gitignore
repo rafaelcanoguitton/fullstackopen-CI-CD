@@ -1,2 +1,4 @@
 node_modules
 part9/patientor-backend/src/routes/controllers
+.env
+front-end/cypress
