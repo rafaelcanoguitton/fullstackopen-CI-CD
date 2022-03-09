@@ -20,10 +20,7 @@ jobs:
       - name: npm install
         run: npm install
       - name: test frontend
-        run: npm run test:frontend
-        with:
-          start: npm run dev & npm run start
-          wait-on: http://localhost:3003,http://localhost:3000
+        run: npm run test
       - name: test backend
         run: npm run test:server
         with:
