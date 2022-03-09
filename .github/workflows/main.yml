@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: create env file
-        run: touch .env && echo "SECRET=${{secrets.SECRET}}" >> .env && echo "PORT=3003" >> .env && echo "TEST_MONGODB_URI=${{secrets.MONGODB_URI}}" >> .env
+        run: touch .env && echo "SECRET=${{secrets.SECRET}}" >> .env && echo "PORT=3003" >> .env && echo "TEST_MONGODB_URI=${{secrets.MONGODB_URI}}" >> .env && echo "MONGO_DB_URI=${{secrets.MONGODB_URI}}" >> .env
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
