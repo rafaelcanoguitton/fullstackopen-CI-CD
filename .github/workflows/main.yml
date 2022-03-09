@@ -33,9 +33,6 @@ jobs:
           TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
           SECRET: ${{ secrets.SECRET }}
         run: npm run test:e2e
-        with:
-          start: npm run start:frontback
-          wait-on: http://localhost:3003
 
   build:
     #name event for pull request
