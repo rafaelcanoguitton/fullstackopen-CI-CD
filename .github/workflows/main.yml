@@ -20,24 +20,22 @@ jobs:
       - name: test frontend
         run: npm run test
       - name: test backend
-        run: npm run test:server && killall node
+        run: npm run test:server
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           PORT: 3003
           TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
           SECRET: ${{ secrets.SECRET }}
       - name: test e2e
-        uses: cypress-io/github-action@v2
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           PORT: 3003
           TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
           SECRET: ${{ secrets.SECRET }}
+        run: npm run test:e2e
         with:
-          command: npm run test:e2e
           start: npm run start:frontback
           wait-on: http://localhost:3003
-          project: "./front-end" 
 
   build:
     #name event for pull request
