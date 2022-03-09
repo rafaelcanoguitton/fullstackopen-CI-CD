@@ -26,26 +26,26 @@ jobs:
           PORT: 3003
           TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
           SECRET: ${{ secrets.SECRET }}
-  end_to_end_pipeline:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-      - name: npm install
-        run: npm install
-      - name: test e2e
-        uses: cypress-io/github-action@v2
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          PORT: 3003
-          TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          SECRET: ${{ secrets.SECRET }}
-        with:
-          command: npm run test:e2e
-          start: npm run start:frontback
-          wait-on: http://localhost:3000
+  # end_to_end_pipeline:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: "12.x"
+  #     - name: npm install
+  #       run: npm install
+  #     - name: test e2e
+  #       uses: cypress-io/github-action@v2
+  #       env:
+  #         MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  #         PORT: 3003
+  #         TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  #         SECRET: ${{ secrets.SECRET }}
+  #       with:
+  #         command: npm run test:e2e
+  #         start: npm run start:frontback
+  #         wait-on: http://localhost:3000
 
   build:
     #name event for pull request
