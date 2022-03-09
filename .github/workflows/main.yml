@@ -11,14 +11,14 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - name: create env file
-        run: touch .env && echo "SECRET=${{secrets.SECRET}}" >> .env && echo "PORT=3003" >> .env && echo "TEST_MONGODB_URI=${{secrets.MONGODB_URI}}" >> .env
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
       - name: npm install
         run: npm install
+      - name: create env file
+        run: touch .env && echo "SECRET=${{secrets.SECRET}}" >> .env && echo "PORT=3003" >> .env && echo "TEST_MONGODB_URI=${{secrets.MONGODB_URI}}" >> .env
       - name: test frontend
         with:
           command: npm run test:frontend
