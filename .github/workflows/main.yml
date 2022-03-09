@@ -20,7 +20,7 @@ jobs:
       - name: test frontend
         run: npm run test
       - name: test backend
-        run: npm run test:server
+        run: npm run test:server && killall node
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           PORT: 3003
@@ -35,7 +35,7 @@ jobs:
           SECRET: ${{ secrets.SECRET }}
         with:
           command: npm run test:e2e
-          start: killall node && npm run start:frontback
+          start: npm run start:frontback
           wait-on: http://localhost:3003
           project: "./front-end" 
 
