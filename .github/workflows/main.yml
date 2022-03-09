@@ -23,9 +23,6 @@ jobs:
         run: npm run test
       - name: test backend
         run: npm run test:server
-        with:
-          start: npm run dev
-          wait-on: http://localhost:3003
       - name: test e2e
         uses: cypress-io/github-action@v2
         with:
